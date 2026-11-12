@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#061d36" />
+    <meta
+      name="description"
+      content="Ingeniería en Ciencias de la Computación de UNICAH te desea una Feliz Navidad."
+    />
+    <meta property="og:title" content="Feliz Navidad · ICC UNICAH" />
+    <meta
+      property="og:description"
+      content="Un mensaje navideño de Ingeniería en Ciencias de la Computación."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="assets/logo-icc.png" />
+    <link rel="icon" href="assets/logo-icc.png" type="image/png" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Feliz Navidad · ICC UNICAH</title>
+    <script>
+      document.documentElement.classList.add("has-js");
+    </script>
+  </head>
+
+  <body>
+    <canvas id="snow" aria-hidden="true"></canvas>
+
+    <div class="sky" aria-hidden="true">
+      <span class="aurora aurora--one"></span>
+      <span class="aurora aurora--two"></span>
+      <span class="glow glow--one"></span>
+      <span class="glow glow--two"></span>
+      <span class="star star--one">✦</span>
+      <span class="star star--two">✦</span>
+      <span class="star star--three">✦</span>
+    </div>
+
+    <main class="page-shell">
+      <article class="greeting-card" aria-labelledby="christmas-title">
+        <div class="card-shine" aria-hidden="true"></div>
+        <span class="corner corner--top-left" aria-hidden="true"></span>
+        <span class="corner corner--bottom-right" aria-hidden="true"></span>
+
+        <header class="brand-lockup reveal reveal--logos">
+          <figure class="logo-frame logo-frame--icc">
+            <img
+              class="logo-image logo-image--icc"
+              src="assets/logo-icc.png"
+              alt="Logotipo de Ingeniería en Ciencias de la Computación, ICC"
+            />
+          </figure>
+
+          <span class="brand-spark" aria-hidden="true">✦</span>
+
+          <figure class="logo-frame logo-frame--unicah">
+            <img
+              class="logo-image logo-image--unicah"
+              src="assets/logo-unicah.png"
+              alt="Escudo de la Universidad Católica de Honduras, UNICAH"
+            />
+          </figure>
+        </header>
+
+        <div class="copy">
+          <p class="eyebrow reveal reveal--eyebrow">Navidad 2026</p>
+
+          <h1 id="christmas-title" class="reveal reveal--title">
+            <span>Te deseamos una</span>
+            <strong>Feliz Navidad</strong>
+          </h1>
+
+          <p class="message reveal reveal--message">
+            Que esta época ilumine tus sueños, renueve tu esperanza y nos inspire a
+            seguir creando juntos un futuro extraordinario.
+          </p>
+
+          <div class="ornament-divider reveal reveal--divider" aria-hidden="true">
+            <span></span>
+            <b>✦</b>
+            <span></span>
+          </div>
+
+          <p class="signature reveal reveal--signature">
+            <strong>Ingeniería en Ciencias de la Computación</strong>
+            <span>UNICAH · Campus Jesús Sacramentado</span>
+          </p>
+        </div>
+
+        <button class="wish-button reveal reveal--button" id="wish-button" type="button">
+          <span class="wish-button__icon" aria-hidden="true">✦</span>
+          <span>Haz brillar la Navidad</span>
+        </button>
+      </article>
+
+      <p class="tiny-note reveal reveal--note">Con cariño, la familia ICC</p>
+    </main>
+
+    <div id="sparkles" class="sparkles" aria-hidden="true"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
+
