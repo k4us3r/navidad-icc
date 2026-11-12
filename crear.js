@@ -785,14 +785,15 @@
   }
 
   function drawCardHeader(context) {
-    pixelRect(context, 14, 12, 88, 63, "#f6c75b");
-    pixelRect(context, 18, 16, 80, 55, "#071b32");
-
     if (iccLogoLoaded && iccLogo.naturalWidth && iccLogo.naturalHeight) {
       const logoWidth = 76;
       const logoHeight = Math.round(logoWidth * (iccLogo.naturalHeight / iccLogo.naturalWidth));
-      const logoY = 18 + Math.round((51 - logoHeight) / 2);
+      const logoY = 16;
+      context.save();
+      context.imageSmoothingEnabled = true;
+      context.imageSmoothingQuality = "high";
       context.drawImage(iccLogo, 20, logoY, logoWidth, logoHeight);
+      context.restore();
     } else {
       context.save();
       context.textAlign = "center";
@@ -807,13 +808,10 @@
     context.textBaseline = "middle";
     context.fillStyle = "rgba(255,255,255,.88)";
     context.font = "800 10px system-ui, sans-serif";
-    context.fillText("ICC · UNICAH", 230, 28);
-    context.fillStyle = "#f6c75b";
-    context.font = "800 10px system-ui, sans-serif";
-    context.fillText("@icc_js", 230, 47);
+    context.fillText("ICC · UNICAH", 230, 34);
     context.fillStyle = "rgba(255,255,255,.58)";
     context.font = "700 7px system-ui, sans-serif";
-    context.fillText("NAVIDAD 2026", 230, 63);
+    context.fillText("NAVIDAD 2026", 230, 55);
     context.fillStyle = "#fff8e8";
     context.font = "italic 700 28px Georgia, serif";
     context.shadowColor = "rgba(0,0,0,.42)";
@@ -1223,6 +1221,13 @@
     const context = output.getContext("2d", { alpha: false });
     context.imageSmoothingEnabled = false;
     context.drawImage(base, 0, 0, EXPORT_WIDTH, EXPORT_HEIGHT);
+    if (iccLogoLoaded && iccLogo.naturalWidth && iccLogo.naturalHeight) {
+      const logoWidth = 76 * 3;
+      const logoHeight = Math.round(logoWidth * (iccLogo.naturalHeight / iccLogo.naturalWidth));
+      context.imageSmoothingEnabled = true;
+      context.imageSmoothingQuality = "high";
+      context.drawImage(iccLogo, 20 * 3, 16 * 3, logoWidth, logoHeight);
+    }
     const blob = await canvasToBlob(output);
     const fileName = makeFileName();
     const file = new File([blob], fileName, { type: "image/png", lastModified: Date.now() });
