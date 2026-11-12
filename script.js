@@ -126,7 +126,19 @@
   }
 
   if (button) {
-    button.addEventListener("click", celebrate);
+    button.addEventListener("click", () => {
+      if (button.disabled) return;
+
+      celebrate();
+      button.disabled = true;
+      button.setAttribute("aria-label", "Abriendo el creador de muñecos de nieve");
+      document.body.classList.add("is-opening-christmas");
+
+      const delay = reducedMotion.matches ? 120 : 620;
+      window.setTimeout(() => {
+        window.location.href = button.dataset.destination || "crear.html";
+      }, delay);
+    });
     button.addEventListener("animationend", () => button.classList.remove("is-celebrating"));
   }
 })();

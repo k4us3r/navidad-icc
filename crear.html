@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#061d36" />
+    <meta
+      name="description"
+      content="Crea tu propio muñeco de nieve pixel art y descarga una postal navideña de ICC UNICAH."
+    />
+    <link rel="icon" href="assets/logo-icc.png" type="image/png" />
+    <link rel="stylesheet" href="crear.css" />
+    <title>Crea tu muñeco · Navidad ICC UNICAH</title>
+  </head>
+
+  <body>
+    <div class="ambient" aria-hidden="true">
+      <span class="ambient__aurora ambient__aurora--one"></span>
+      <span class="ambient__aurora ambient__aurora--two"></span>
+      <div id="ambient-snow" class="ambient__snow"></div>
+    </div>
+
+    <header class="creator-header">
+      <a class="back-link" href="index.html" aria-label="Regresar a la bienvenida">
+        <span aria-hidden="true">←</span>
+        <span>Bienvenida</span>
+      </a>
+
+      <div class="mini-brand" aria-label="ICC UNICAH">
+        <span class="mini-brand__logo">
+          <img src="assets/logo-icc.png" alt="ICC" />
+        </span>
+        <span class="mini-brand__spark" aria-hidden="true">✦</span>
+        <span class="mini-brand__logo mini-brand__logo--unicah">
+          <img src="assets/logo-unicah.png" alt="UNICAH" />
+        </span>
+      </div>
+    </header>
+
+    <main class="creator-shell">
+      <section class="creator-intro" aria-labelledby="creator-title">
+        <p class="pixel-kicker">NAVIDAD ICC · UNICAH 2026</p>
+        <h1 id="creator-title">¡Dale vida a tu Navidad!</h1>
+        <p>Diseña tu propio muñeco de nieve, ponle un nombre y comparte tu creación.</p>
+      </section>
+
+      <section class="workspace" aria-label="Creador de muñecos de nieve">
+        <div class="preview-column">
+          <div class="preview-card">
+            <div class="preview-card__label">
+              <span class="live-dot" aria-hidden="true"></span>
+              Vista previa en tiempo real
+            </div>
+            <canvas
+              id="snowman-canvas"
+              width="360"
+              height="640"
+              aria-label="Vista previa de tu postal y muñeco de nieve"
+            ></canvas>
+          </div>
+
+          <div class="quick-actions" aria-label="Acciones rápidas">
+            <button class="game-button game-button--gold" id="randomize-button" type="button">
+              <span aria-hidden="true">◆</span>
+              Sorpréndeme 🎲
+            </button>
+            <button class="game-button" id="reset-button" type="button">
+              <span aria-hidden="true">↺</span>
+              Reiniciar
+            </button>
+          </div>
+        </div>
+
+        <div class="customizer">
+          <nav class="category-tabs" id="category-tabs" aria-label="Categorías de personalización"></nav>
+
+          <section class="options-panel" aria-labelledby="category-title">
+            <div class="panel-heading">
+              <div>
+                <span class="panel-heading__step">PERSONALIZA</span>
+                <h2 id="category-title">Cuerpo</h2>
+              </div>
+              <span id="option-counter" class="option-counter"></span>
+            </div>
+            <div class="option-grid" id="option-grid"></div>
+          </section>
+
+          <section class="name-panel" aria-labelledby="name-title">
+            <div class="name-panel__copy">
+              <span class="panel-heading__step">ÚLTIMO DETALLE</span>
+              <h2 id="name-title">¿Cómo se llama tu muñeco?</h2>
+              <p>Su nombre aparecerá en la postal.</p>
+            </div>
+            <label class="name-field" for="snowman-name">
+              <span class="sr-only">Nombre del muñeco</span>
+              <input
+                id="snowman-name"
+                type="text"
+                maxlength="24"
+                autocomplete="off"
+                enterkeyhint="done"
+                placeholder="Copito"
+              />
+              <span id="name-count" aria-live="polite">0/24</span>
+            </label>
+          </section>
+
+          <button class="finish-button" id="finish-button" type="button">
+            <span>Crear mi postal</span>
+            <b aria-hidden="true">✨</b>
+          </button>
+        </div>
+      </section>
+
+      <p class="privacy-note">
+        Tu creación permanece en este dispositivo. No necesitas cuenta y no enviamos tus datos.
+      </p>
+    </main>
+
+    <section class="final-screen" id="final-screen" aria-labelledby="final-title" hidden>
+      <div id="celebration-particles" class="celebration-particles" aria-hidden="true"></div>
+      <div class="final-shell">
+        <button class="final-back" id="final-back" type="button">← Seguir personalizando</button>
+        <div class="final-copy">
+          <span>✦ CREACIÓN TERMINADA ✦</span>
+          <h2 id="final-title">¡Tu Navidad cobró vida!</h2>
+          <p>Descarga la postal o compártela desde tu teléfono.</p>
+        </div>
+
+        <div class="final-postcard">
+          <canvas
+            id="final-canvas"
+            width="360"
+            height="640"
+            aria-label="Postal navideña final"
+          ></canvas>
+        </div>
+
+        <div class="final-actions">
+          <button class="download-button" id="download-button" type="button">
+            Descargar mi muñeco ⬇️
+          </button>
+          <button class="share-button" id="share-button" type="button" disabled>
+            Compartir mi creación 📲
+          </button>
+        </div>
+        <p id="share-status" class="share-status" role="status">
+          Preparando tu imagen en alta resolución…
+        </p>
+        <p class="instagram-note">
+          En teléfonos compatibles, Instagram puede aparecer entre las aplicaciones disponibles.
+        </p>
+      </div>
+    </section>
+
+    <dialog class="save-dialog" id="save-dialog">
+      <form method="dialog" class="save-dialog__card">
+        <button class="save-dialog__close" value="close" aria-label="Cerrar">×</button>
+        <h2>Guarda tu postal</h2>
+        <p>Mantén presionada la imagen y selecciona <strong>Guardar en Fotos</strong>.</p>
+        <img id="save-preview" alt="Postal navideña lista para guardar" />
+        <button class="game-button game-button--gold" value="close">Entendido</button>
+      </form>
+    </dialog>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script src="crear.js"></script>
+  </body>
+</html>
+
