@@ -364,6 +364,7 @@ button {
   overflow-x: auto;
   scrollbar-width: thin;
   scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
 }
 
 .category-tab {
@@ -624,6 +625,67 @@ button {
   line-height: 1.45;
 }
 
+.instagram-invite {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.65rem;
+  margin: 0.8rem 0;
+  padding: 0.8rem;
+  border: 1px solid rgba(246, 199, 91, 0.28);
+  border-radius: 0.8rem;
+  background: linear-gradient(145deg, rgba(246, 199, 91, 0.11), rgba(10, 47, 76, 0.52));
+}
+
+.instagram-invite__icon {
+  display: grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  place-items: center;
+  border: 1px solid rgba(246, 199, 91, 0.42);
+  border-radius: 0.55rem;
+  color: var(--gold);
+  background: rgba(246, 199, 91, 0.08);
+  text-shadow: 0 0 8px rgba(246, 199, 91, 0.7);
+}
+
+.instagram-invite h3,
+.instagram-invite p {
+  margin: 0;
+}
+
+.instagram-invite h3 {
+  font-size: 0.88rem;
+}
+
+.instagram-invite p {
+  margin-top: 0.25rem;
+  color: var(--muted);
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+
+.instagram-invite strong {
+  color: var(--gold-soft);
+}
+
+.instagram-invite button {
+  grid-column: 2;
+  width: max-content;
+  min-height: 2.45rem;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid rgba(246, 199, 91, 0.32);
+  border-radius: 0.55rem;
+  color: var(--gold-soft);
+  background: rgba(3, 20, 38, 0.62);
+  cursor: pointer;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.instagram-invite button:hover {
+  border-color: var(--gold);
+}
+
 .final-postcard {
   width: min(100%, 21rem);
   margin: 0 auto;
@@ -807,6 +869,151 @@ input:focus-visible {
   from { opacity: 0; transform: scale(1.02); }
 }
 
+@media (max-width: 44.99rem) {
+  .creator-header {
+    padding-top: max(0.55rem, env(safe-area-inset-top));
+    padding-bottom: 0.35rem;
+  }
+
+  .creator-shell {
+    padding-top: 0.35rem;
+  }
+
+  .creator-intro {
+    margin-bottom: 0.7rem;
+  }
+
+  .creator-intro h1 {
+    margin-top: 0.25rem;
+    font-size: clamp(1.9rem, 9.5vw, 2.75rem);
+  }
+
+  .creator-intro > p:last-child {
+    font-size: 0.86rem;
+    line-height: 1.42;
+  }
+
+  .preview-column {
+    position: sticky;
+    top: 0;
+    z-index: 12;
+    display: grid;
+    grid-template-columns: minmax(7.2rem, 9rem) minmax(0, 1fr);
+    align-items: center;
+    gap: 0.6rem;
+    margin: 0 -0.85rem 0.7rem;
+    padding:
+      0.5rem
+      max(0.85rem, env(safe-area-inset-right))
+      0.55rem
+      max(0.85rem, env(safe-area-inset-left));
+    border-top: 1px solid rgba(246, 199, 91, 0.14);
+    border-bottom: 1px solid rgba(246, 199, 91, 0.2);
+    background: rgba(3, 20, 38, 0.9);
+    box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .preview-card {
+    display: grid;
+    width: 100%;
+    place-items: center;
+    margin: 0;
+    padding: 0.3rem;
+    border-radius: 0.75rem;
+  }
+
+  .preview-card::before,
+  .preview-card__label {
+    display: none;
+  }
+
+  #snowman-canvas {
+    width: auto;
+    max-width: 100%;
+    max-height: 31svh;
+    border-radius: 0.48rem;
+  }
+
+  .quick-actions {
+    grid-template-columns: 1fr;
+    align-content: center;
+    gap: 0.55rem;
+    width: 100%;
+    margin: 0;
+  }
+
+  .quick-actions .game-button {
+    min-height: 2.75rem;
+    padding: 0.45rem 0.3rem;
+  }
+
+  .customizer {
+    min-width: 0;
+  }
+
+  .category-tabs {
+    margin-bottom: 0.6rem;
+  }
+
+  .category-tab {
+    min-width: 4.35rem;
+    min-height: 4.1rem;
+  }
+
+  .options-panel,
+  .name-panel {
+    padding: 0.8rem;
+  }
+
+  .option-grid {
+    gap: 0.45rem;
+  }
+
+  .option-button {
+    min-height: 5.1rem;
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
+  }
+
+  .option-button canvas {
+    width: 2.8rem;
+    height: 2.8rem;
+  }
+
+  .name-panel {
+    margin-top: 0.65rem;
+  }
+
+  .finish-button {
+    min-height: 3.4rem;
+    margin-top: 0.65rem;
+  }
+
+  .final-copy {
+    margin-bottom: 0.7rem;
+  }
+
+  .final-copy h2 {
+    font-size: clamp(1.8rem, 8.5vw, 2.5rem);
+  }
+
+  .final-postcard {
+    width: min(68vw, 15.5rem);
+    padding: 0.4rem;
+  }
+
+  .final-actions {
+    margin-top: 0.75rem;
+  }
+
+  .download-button,
+  .share-button {
+    min-height: 3.1rem;
+  }
+}
+
 @media (min-width: 45rem) {
   .creator-shell {
     padding-top: 1.2rem;
@@ -842,6 +1049,15 @@ input:focus-visible {
   .final-actions {
     grid-template-columns: 1fr 1fr;
   }
+
+  .instagram-invite {
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+  }
+
+  .instagram-invite button {
+    grid-column: 3;
+  }
 }
 
 @media (max-width: 340px) {
@@ -865,6 +1081,16 @@ input:focus-visible {
 
   .option-button {
     min-height: 5.25rem;
+  }
+
+  .preview-column {
+    grid-template-columns: minmax(6.2rem, 7rem) minmax(0, 1fr);
+    padding-right: 0.6rem;
+    padding-left: 0.6rem;
+  }
+
+  .quick-actions .game-button {
+    font-size: 0.7rem;
   }
 }
 

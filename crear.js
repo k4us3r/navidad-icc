@@ -215,6 +215,7 @@
     finalBack: document.querySelector("#final-back"),
     download: document.querySelector("#download-button"),
     share: document.querySelector("#share-button"),
+    copyHandle: document.querySelector("#copy-handle"),
     shareStatus: document.querySelector("#share-status"),
     particles: document.querySelector("#celebration-particles"),
     ambientSnow: document.querySelector("#ambient-snow"),
@@ -232,6 +233,18 @@
   let exportCache = null;
   let exportPromise = null;
   let savePreviewUrl = "";
+  const iccLogo = new Image();
+  let iccLogoLoaded = false;
+  const iccLogoReady = new Promise((resolve) => {
+    iccLogo.onload = () => {
+      iccLogoLoaded = true;
+      resolve(true);
+      requestRender();
+    };
+    iccLogo.onerror = () => resolve(false);
+  });
+  iccLogo.decoding = "async";
+  iccLogo.src = "assets/logo-icc.png";
 
   function categoryById(id) {
     return CATEGORIES.find((category) => category.id === id);
@@ -772,21 +785,44 @@
   }
 
   function drawCardHeader(context) {
+    pixelRect(context, 14, 12, 88, 63, "#f6c75b");
+    pixelRect(context, 18, 16, 80, 55, "#071b32");
+
+    if (iccLogoLoaded && iccLogo.naturalWidth && iccLogo.naturalHeight) {
+      const logoWidth = 76;
+      const logoHeight = Math.round(logoWidth * (iccLogo.naturalHeight / iccLogo.naturalWidth));
+      const logoY = 18 + Math.round((51 - logoHeight) / 2);
+      context.drawImage(iccLogo, 20, logoY, logoWidth, logoHeight);
+    } else {
+      context.save();
+      context.textAlign = "center";
+      context.fillStyle = "#fff8e8";
+      context.font = "900 18px system-ui, sans-serif";
+      context.fillText("ICC", 58, 50);
+      context.restore();
+    }
+
     context.save();
     context.textAlign = "center";
     context.textBaseline = "middle";
-    context.fillStyle = "rgba(255,255,255,.8)";
-    context.font = "700 10px system-ui, sans-serif";
-    context.fillText("ICC · UNICAH", CARD_WIDTH / 2, 25);
+    context.fillStyle = "rgba(255,255,255,.88)";
+    context.font = "800 10px system-ui, sans-serif";
+    context.fillText("ICC · UNICAH", 230, 28);
+    context.fillStyle = "#f6c75b";
+    context.font = "800 10px system-ui, sans-serif";
+    context.fillText("@icc_js", 230, 47);
+    context.fillStyle = "rgba(255,255,255,.58)";
+    context.font = "700 7px system-ui, sans-serif";
+    context.fillText("NAVIDAD 2026", 230, 63);
     context.fillStyle = "#fff8e8";
     context.font = "italic 700 28px Georgia, serif";
     context.shadowColor = "rgba(0,0,0,.42)";
     context.shadowOffsetX = 3;
     context.shadowOffsetY = 3;
-    context.fillText("¡Feliz Navidad!", CARD_WIDTH / 2, 61);
+    context.fillText("¡Feliz Navidad!", CARD_WIDTH / 2, 100);
     context.restore();
-    drawPixelStar(context, 46, 57, 5, "#f6c75b");
-    drawPixelStar(context, 314, 57, 5, "#f6c75b");
+    drawPixelStar(context, 45, 98, 5, "#f6c75b");
+    drawPixelStar(context, 315, 98, 5, "#f6c75b");
   }
 
   function fitText(context, text, maxWidth, startSize, family) {
@@ -1175,6 +1211,7 @@
   async function buildExportAsset() {
     const version = stateVersion;
     const snapshot = { ...state, name: displayName() };
+    await iccLogoReady;
     const base = document.createElement("canvas");
     base.width = CARD_WIDTH;
     base.height = CARD_HEIGHT;
@@ -1289,6 +1326,33 @@
     }
   }
 
+  async function copyInstagramHandle() {
+    const handle = "@icc_js";
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(handle);
+      } else {
+        const input = document.createElement("textarea");
+        input.value = handle;
+        input.setAttribute("readonly", "");
+        input.style.position = "fixed";
+        input.style.opacity = "0";
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand("copy");
+        input.remove();
+      }
+      elements.copyHandle.textContent = "Copiado ✓";
+      showToast("@icc_js copiado al portapapeles");
+      window.setTimeout(() => {
+        elements.copyHandle.textContent = "Copiar @icc_js";
+      }, 1800);
+    } catch (_error) {
+      elements.copyHandle.textContent = "@icc_js";
+      showToast("Copia manualmente: @icc_js");
+    }
+  }
+
   function openFinalScreen() {
     elements.finalScreen.hidden = false;
     document.body.style.overflow = "hidden";
@@ -1319,6 +1383,7 @@
     elements.finalBack.addEventListener("click", closeFinalScreen);
     elements.download.addEventListener("click", downloadPostcard);
     elements.share.addEventListener("click", sharePostcard);
+    elements.copyHandle.addEventListener("click", copyInstagramHandle);
     elements.saveDialog.addEventListener("close", () => {
       if (savePreviewUrl) {
         URL.revokeObjectURL(savePreviewUrl);
